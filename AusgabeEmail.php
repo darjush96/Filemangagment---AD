@@ -3,7 +3,7 @@
   include_once("libs/csvspaltennamen.php");
   $link = dbconn();
   selectdb($link, 'Adexport');
-  $sql    = "";
+  $sql    = "SELECT DISTINCT * FROM NeueMail WHERE EXISTS(SELECT NULL FROM AdMail WHERE AdMail.mail = NeueMail.mail)";
   //
 //$sql    = "SELECT * FROM Export2 WHERE NOT EXISTS(SELECT NULL FROM Export1 WHERE Export1.verg_id = Export2.verg_id)"
     $resu = mysql_query($sql);
@@ -21,7 +21,7 @@
     while ($row = mysql_fetch_array($resu))
     {
       //$row["benutzerstatus"]
-      $line = array("","",$row["vorname"],"",$row["name"],$row["name"]." ".$row["vorname"],$row["name"]." ".$row["vorname"],$row['name'][0].$row['vorname'][0].$row['verg_ID'],"2wsx","Schueler",$row["verg_ID"],$row["regelklasse"],preg_replace('/[^a-zA-Z]+/', '', $row["id"]),$row["id"],"Aarauerstrasse 30","4600","Olten","","Schweiz","CH",$row["telefon"],"","","",$row["mobile"],"","","","","","","","",$row['benutzername']."@bbzolten.ch",$row['name'][0].$row['vorname'][0].$row['verg_ID']."@bbzolten.ch","","www.bbzolten.so.ch","","","1","1","1","240","","","1","0","","","1","1","1","Users","G_netDomain","G_Win7Office16","Schueler","G_WLanBBZO","","","","","","","","","","","","","","","","","","","","","","","","","");
+      $line = array("","",$row["givenName"],$row["initials"],$row["sn"],$row["displayName"],$row["cn"],$row["sAMAccountName"],"2wsx","Schueler","","","","","Aarauerstrasse 30","4600","Olten","","Schweiz","CH","","","","","","","","","","","","","",$row['mail'],"","","www.bbzolten.so.ch","","","1","1","1","240","","","1","0","","","1","1","1","Users","G_netDomain","G_Win7Office16","Schueler","G_WLanBBZO","","","","","","","","","","","","","","","","","","","","","","","","","");
       fputcsv($output, $line, ";");
       }
 
