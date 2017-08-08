@@ -22,7 +22,7 @@ function neueschuelerabfrage(){
     while ($row = mysql_fetch_array($resu))
     {
       //$row["benutzerstatus"]
-      $line = array("","",$row["vorname"],"",$row["name"],$row["name"]." ".$row["vorname"],$row["name"]." ".$row["vorname"],$row['name'][0].$row['vorname'][0].$row['verg_ID'],"2wsx","Schueler",$row["verg_ID"],$row["regelklasse"],preg_replace('/[^a-zA-Z]+/', '', $row["id"]),$row["id"],"Aarauerstrasse 30","4600","Olten","","Schweiz","CH",$row["telefon"],"","","",$row["mobile"],"","","","","","","","",$row["emailadresse"],$row['name'][0].$row['vorname'][0].$row['verg_ID']."@bbzolten.ch","","www.bbzolten.so.ch","","","1","1","1","240","","","1","0","","","1","1","1","Users","G_netDomain","G_Win7Office16","Schueler","G_WLanBBZO","","","","","","","","","","","","","","","","","","","","","","","","","");
+      $line = array("","",$row["vorname"],"",$row["name"],$row["name"]." ".$row["vorname"],$row["name"]." ".$row["vorname"],$row['name'][0].$row['vorname'][0].$row['verg_ID'],"2wsx","Schueler",$row["verg_ID"],$row["regelklasse"],preg_replace('/[^a-zA-Z]+/', '', $row["id"]),$row["id"],"Aarauerstrasse 30","4600","Olten","","Schweiz","CH",$row["telefon"],"","","",$row["mobile"],"","","","","","","","",$row['benutzername']."@bbzolten.ch",$row['name'][0].$row['vorname'][0].$row['verg_ID']."@bbzolten.ch","","www.bbzolten.so.ch","","","1","1","1","240","","","1","0","","","1","1","1","Users","G_netDomain","G_Win7Office16","Schueler","G_WLanBBZO","","","","","","","","","","","","","","","","","","","","","","","","","");
       fputcsv($output, $line, ";");
       }
 

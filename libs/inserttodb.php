@@ -102,5 +102,118 @@ fclose($handle);
   }
 
 }
+//______________________________________________________________________________
+//------------------------------------------------------------------------------
+//----------------NEUE FUNKTIONEN-----------------------------------------------
+//----------------NEUE FUNKTIONEN-----------------------------------------------
+//------------------------------------------------------------------------------
+//______________________________________________________________________________
+
+function insertADMailtoDB(){
+  include_once ("dbconnect.php");
+  include_once ("functions.php");
+  $link = dbconn();
+  echo $_FILES['datei']['tmp_name'] . "</br>";
+  $dataname   = $_FILES['datei']['name'];
+  echo $dataname;
+
+  $fieldnames = 1;
+  ini_set("auto_detect_line_endings", true);
+  if (($handle = fopen("..//uploads/" . $dataname, "r")) !== FALSE) { //Datei mit entsprechend ausgewähltem dateinamen auswähläen
+    while (($data = fgetcsv($handle, 0, ";")) !== FALSE) { //csv auslesen mit ; trennung
+        $num = count($data); //Datensätze zählen
+        if ($fieldnames !== 0) {
+            $fieldnames = 0;
+
+            createdb();
+            selectdb($link, 'Adexport');
+            $sql = 'DROP TABLE Neuemail';
+            mysql_query($sql);
+            $sql = 'CREATE TABLE ADMail' . '(';
+            for ($c = 0; $c < $num; $c++) {
+                $sql .= '`' . $data[$c] . '` varchar(150)';
+                if ($c < $num - 1) {
+                    $sql .= ', ';
+                }
+
+            } //sql-> Tabelle erstellen
+            $sql .= ')';
+            //  echo $sql . "</br>";
+            $result = mysql_query($sql); //sql übergeben (Wichtig sonst funzt SQL nicht)
+        }
+
+        else {
+            $sql = 'INSERT INTO ADMail VALUES (';
+            for ($c = 0; $c < $num; $c++) { //für jeden Datensat
+                $sql .= '"' . $data[$c] . '"';
+                if ($c < $num - 1) {
+                    $sql .= ', ';
+                }
+                if ($c < 0) {
+                    $sql .= ', ';
+                } //den text ausgeben ($data = Array)
+            }
+            $sql .= ');';
+
+            //  echo $sql;
+            $result = mysql_query($sql); //sql übergeben (Wichtig sonst funzt SQL nicht)
+        }
+    }
+}
+}
+
+function insertNeueEmailtoDB(){
+  include_once ("dbconnect.php");
+  include_once ("functions.php");
+  $link = dbconn();
+    echo "</br>"."ayyyy";
+  echo $_FILES['datei']['tmp_name'] . "</br>";
+  $dataname   = $_FILES['datei']['name'];
+  echo $dataname;
+
+  $fieldnames = 1;
+  ini_set("auto_detect_line_endings", true);
+  if (($handle = fopen("../uploads/" . $dataname, "r")) !== FALSE) { //Datei mit entsprechend ausgewähltem dateinamen auswähläen
+    while (($data = fgetcsv($handle, 0, ";")) !== FALSE) { //csv auslesen mit ; trennung
+        $num = count($data); //Datensätze zählen
+        if ($fieldnames !== 0) {
+            $fieldnames = 0;
+
+            createdb();
+            selectdb($link, 'Adexport');
+            $sql = 'DROP TABLE Neuemail';
+            mysql_query($sql);
+            $sql = 'CREATE TABLE NeueMail' . '(';
+            for ($c = 0; $c < $num; $c++) {
+                $sql .= '`' . $data[$c] . '` varchar(150)';
+                if ($c < $num - 1) {
+                    $sql .= ', ';
+                }
+
+            } //sql-> Tabelle erstellen
+            $sql .= ')';
+            //  echo $sql . "</br>";
+            $result = mysql_query($sql); //sql übergeben (Wichtig sonst funzt SQL nicht)
+        }
+
+        else {
+            $sql = 'INSERT INTO NeueMail VALUES (';
+            for ($c = 0; $c < $num; $c++) { //für jeden Datensat
+                $sql .= '"' . $data[$c] . '"';
+                if ($c < $num - 1) {
+                    $sql .= ', ';
+                }
+                if ($c < 0) {
+                    $sql .= ', ';
+                } //den text ausgeben ($data = Array)
+            }
+            $sql .= ');';
+
+            //  echo $sql;
+            $result = mysql_query($sql); //sql übergeben (Wichtig sonst funzt SQL nicht)
+        }
+    }
+}
+}
 
 ?>
