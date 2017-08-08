@@ -119,7 +119,7 @@ function insertADMailtoDB(){
 
   $fieldnames = 1;
   ini_set("auto_detect_line_endings", true);
-  if (($handle = fopen("..//uploads/" . $dataname, "r")) !== FALSE) { //Datei mit entsprechend ausgewähltem dateinamen auswähläen
+  if (($handle = fopen("../uploads/" . $dataname, "r")) !== FALSE) { //Datei mit entsprechend ausgewähltem dateinamen auswähläen
     while (($data = fgetcsv($handle, 0, ";")) !== FALSE) { //csv auslesen mit ; trennung
         $num = count($data); //Datensätze zählen
         if ($fieldnames !== 0) {
@@ -127,9 +127,9 @@ function insertADMailtoDB(){
 
             createdb();
             selectdb($link, 'Adexport');
-            $sql = 'DROP TABLE Neuemail';
+            $sql = 'DROP TABLE AdMail';
             mysql_query($sql);
-            $sql = 'CREATE TABLE ADMail' . '(';
+            $sql = 'CREATE TABLE AdMail' . '(';
             for ($c = 0; $c < $num; $c++) {
                 $sql .= '`' . $data[$c] . '` varchar(150)';
                 if ($c < $num - 1) {
@@ -143,7 +143,7 @@ function insertADMailtoDB(){
         }
 
         else {
-            $sql = 'INSERT INTO ADMail VALUES (';
+            $sql = 'INSERT INTO AdMail VALUES (';
             for ($c = 0; $c < $num; $c++) { //für jeden Datensat
                 $sql .= '"' . $data[$c] . '"';
                 if ($c < $num - 1) {
@@ -166,7 +166,6 @@ function insertNeueEmailtoDB(){
   include_once ("dbconnect.php");
   include_once ("functions.php");
   $link = dbconn();
-    echo "</br>"."ayyyy";
   echo $_FILES['datei']['tmp_name'] . "</br>";
   $dataname   = $_FILES['datei']['name'];
   echo $dataname;

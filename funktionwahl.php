@@ -20,7 +20,7 @@
 <input type="submit" value="Hochladen">
 </form>
 
-<form action="funktionwahl.php" mehtod="post" enctype="multipart/form-data">
+<form action="AusgabeEmail.php" mehtod="post" enctype="multipart/form-data">
   <input type="submit" value="Weiter">
 </form>
 </body>
