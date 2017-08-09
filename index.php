@@ -12,6 +12,12 @@
   </head>
 
 	<body>
+    <?php
+        include_once ("libs/replacespecialchar.php");
+    $string = "Ich häbe Hünger!";
+    //sonderzeichen($string);
+    echo sonderzeichen($string);
+    ?>
     <h2>Bitte Wählen Sie den Upload für den Active Directory Export</h2>
 		<form action="upload.php" method="post" enctype="multipart/form-data">
 		<input type="file" name="datei"><br>

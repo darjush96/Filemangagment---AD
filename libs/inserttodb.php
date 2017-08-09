@@ -6,7 +6,6 @@ function insertADtoDB(){
   echo $_FILES['datei']['tmp_name'] . "</br>";
   $dataname   = $_FILES['datei']['name'];
   echo $dataname;
-
   $fieldnames = 1;
   ini_set("auto_detect_line_endings", true);
   if (($handle = fopen("uploads/" . $dataname, "r")) !== FALSE) { //Datei mit entsprechend ausgewähltem dateinamen auswähläen
@@ -14,7 +13,6 @@ function insertADtoDB(){
         $num = count($data); //Datensätze zählen
         if ($fieldnames !== 0) {
             $fieldnames = 0;
-
             createdb();
             selectdb($link, 'Adexport');
             $sql = 'CREATE TABLE Export1' . '(';
@@ -23,13 +21,11 @@ function insertADtoDB(){
                 if ($c < $num - 1) {
                     $sql .= ', ';
                 }
-
             } //sql-> Tabelle erstellen
             $sql .= ')';
             //  echo $sql . "</br>";
             $result = mysql_query($sql); //sql übergeben (Wichtig sonst funzt SQL nicht)
         }
-
         else {
             $sql = 'INSERT INTO Export1 VALUES (';
             for ($c = 0; $c < $num; $c++) { //für jeden Datensat
@@ -42,22 +38,23 @@ function insertADtoDB(){
                 } //den text ausgeben ($data = Array)
             }
             $sql .= ');';
-
             //  echo $sql;
             $result = mysql_query($sql); //sql übergeben (Wichtig sonst funzt SQL nicht)
         }
     }
 }
 }
-
 function insertKaschusotoDB($Teilschule){
   include_once ("dbconnect.php");
   include_once ("functions.php");
+  include_once ("libs/replacespecialchar.php");
+  $string = "Ich häbe Hünger!";
+  //sonderzeichen($string);
+  echo sonderzeichen($string);
   $link = dbconn();
   echo $_FILES['datei']['tmp_name'] . "</br>";
   $dataname   = $_FILES['datei']['name'];
   echo $dataname;
-
   $fieldnames = 1;
   if (($handle = fopen("uploads/" . $dataname, "r")) !== FALSE) { //Datei mit entsprechend ausgewähltem dateinamen auswähläen
       while (($data = fgetcsv($handle, 0, ";")) !== FALSE) { //csv auslesen mit ; trennung
@@ -65,7 +62,6 @@ function insertKaschusotoDB($Teilschule){
           for($c = 0; $c < $num - 1; $c++){
           if ($fieldnames !== 0) { //wird ausgeführt solange Fieldname nicht 0 ist
               $fieldnames = 0; //field name wird auf 0 gesetzt dass nur die Spaltennamen gezogen werden
-
               //createdb(); //db erstell funktion aufrufen
               selectdb($link, 'Adexport'); // DB Auswählen, wir geben die DB verbindung (funktion dbconn) und den 'Datenbank Namen' mit
               $sql = 'CREATE TABLE Export2' . '('; //Tabelle erstellen namens Export 2
@@ -74,14 +70,13 @@ function insertKaschusotoDB($Teilschule){
                   if ($c < $num - 2) { //Beim Letzten "Datensatz" das , wegnehmen
                       $sql .= ', ';
                   }
-
               }
               $sql .= ')';
               //echo $sql . "</br>";
               mysql_query($sql); //sql übergeben (Wichtig sonst funzt SQL nicht)
           }
-
           else { //Alle Datensätze ausser die Spalten namen werden nun in die Tabelle eingefügt
+              $data[6] = sonderzeichen($data[6]);
               $sql = 'INSERT INTO Export2 VALUES (';
               for ($c = 0; $c < $num -1; $c++) { //für jeden Datensat
                   $sql .= '"' . $data[$c] . '"';
@@ -100,7 +95,6 @@ function insertKaschusotoDB($Teilschule){
       }
 fclose($handle);
   }
-
 }
 //______________________________________________________________________________
 //------------------------------------------------------------------------------
@@ -108,7 +102,6 @@ fclose($handle);
 //----------------NEUE FUNKTIONEN-----------------------------------------------
 //------------------------------------------------------------------------------
 //______________________________________________________________________________
-
 function insertADMailtoDB(){
   include_once ("dbconnect.php");
   include_once ("functions.php");
@@ -116,7 +109,6 @@ function insertADMailtoDB(){
   echo $_FILES['datei']['tmp_name'] . "</br>";
   $dataname   = $_FILES['datei']['name'];
   echo $dataname;
-
   $fieldnames = 1;
   ini_set("auto_detect_line_endings", true);
   if (($handle = fopen("../uploads/" . $dataname, "r")) !== FALSE) { //Datei mit entsprechend ausgewähltem dateinamen auswähläen
@@ -124,7 +116,6 @@ function insertADMailtoDB(){
         $num = count($data); //Datensätze zählen
         if ($fieldnames !== 0) {
             $fieldnames = 0;
-
             createdb();
             selectdb($link, 'Adexport');
             $sql = 'DROP TABLE AdMail';
@@ -135,13 +126,11 @@ function insertADMailtoDB(){
                 if ($c < $num - 1) {
                     $sql .= ', ';
                 }
-
             } //sql-> Tabelle erstellen
             $sql .= ')';
             //  echo $sql . "</br>";
             $result = mysql_query($sql); //sql übergeben (Wichtig sonst funzt SQL nicht)
         }
-
         else {
             $sql = 'INSERT INTO AdMail VALUES (';
             for ($c = 0; $c < $num; $c++) { //für jeden Datensat
@@ -154,14 +143,12 @@ function insertADMailtoDB(){
                 } //den text ausgeben ($data = Array)
             }
             $sql .= ');';
-
             //  echo $sql;
             $result = mysql_query($sql); //sql übergeben (Wichtig sonst funzt SQL nicht)
         }
     }
 }
 }
-
 function insertNeueEmailtoDB(){
   include_once ("dbconnect.php");
   include_once ("functions.php");
@@ -169,7 +156,6 @@ function insertNeueEmailtoDB(){
   echo $_FILES['datei']['tmp_name'] . "</br>";
   $dataname   = $_FILES['datei']['name'];
   echo $dataname;
-
   $fieldnames = 1;
   ini_set("auto_detect_line_endings", true);
   if (($handle = fopen("../uploads/" . $dataname, "r")) !== FALSE) { //Datei mit entsprechend ausgewähltem dateinamen auswähläen
@@ -177,7 +163,6 @@ function insertNeueEmailtoDB(){
         $num = count($data); //Datensätze zählen
         if ($fieldnames !== 0) {
             $fieldnames = 0;
-
             createdb();
             selectdb($link, 'Adexport');
             $sql = 'DROP TABLE Neuemail';
@@ -188,13 +173,11 @@ function insertNeueEmailtoDB(){
                 if ($c < $num - 1) {
                     $sql .= ', ';
                 }
-
             } //sql-> Tabelle erstellen
             $sql .= ')';
             //  echo $sql . "</br>";
             $result = mysql_query($sql); //sql übergeben (Wichtig sonst funzt SQL nicht)
         }
-
         else {
             $sql = 'INSERT INTO NeueMail VALUES (';
             for ($c = 0; $c < $num; $c++) { //für jeden Datensat
@@ -207,12 +190,10 @@ function insertNeueEmailtoDB(){
                 } //den text ausgeben ($data = Array)
             }
             $sql .= ');';
-
             //  echo $sql;
             $result = mysql_query($sql); //sql übergeben (Wichtig sonst funzt SQL nicht)
         }
     }
 }
 }
-
 ?>
