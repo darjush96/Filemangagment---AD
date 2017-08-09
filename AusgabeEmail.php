@@ -9,7 +9,7 @@
     $resu = mysql_query($sql);
     // output headers so that the file is downloaded rather than displayed
     header('Content-Type: text/csv; charset=utf-8');
-    header('Content-Disposition: attachment; filename=NeueschuelerExport.csv');
+    header('Content-Disposition: attachment; filename=EmailAdresseInADvorhanden.csv');
     // create a file pointer connected to the output stream
     $output = fopen('php://output', 'w');
 /*    $spaltnam = $spaltenname;
@@ -21,7 +21,7 @@
     while ($row = mysql_fetch_array($resu))
     {
       //$row["benutzerstatus"]
-      $line = array("","",$row["givenName"],$row["initials"],$row["sn"],$row["displayName"],$row["cn"],$row["sAMAccountName"],"2wsx","Schueler","","","","","Aarauerstrasse 30","4600","Olten","","Schweiz","CH","","","","","","","","","","","","","",$row['mail'],"","","www.bbzolten.so.ch","","","1","1","1","240","","","1","0","","","1","1","1","Users","G_netDomain","G_Win7Office16","Schueler","G_WLanBBZO","","","","","","","","","","","","","","","","","","","","","","","","","");
+      $line = array("","",$row["givenName"],$row["initials"],$row["sn"],$row["displayName"],$row["cn"],$row["sAMAccountName"],"2wsx","Schueler",$row["employeeID"],$row["department"],$row["company"],$row["streetAdress"],"Aarauerstrasse 30","4600","Olten","","Schweiz","CH","","","","","","","","","","","","","",$row['mail'],"","","www.bbzolten.so.ch","","","1","1","1","240","","","1","0","","","1","1","1","Users","G_netDomain","G_Win7Office16","Schueler","G_WLanBBZO","","","","","","","","","","","","","","","","","","","","","","","","","");
       fputcsv($output, $line, ";");
       }
 
