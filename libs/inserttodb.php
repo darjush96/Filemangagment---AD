@@ -59,6 +59,7 @@ function insertKaschusotoDB($Teilschule){
   if (($handle = fopen("uploads/" . $dataname, "r")) !== FALSE) { //Datei mit entsprechend ausgewähltem dateinamen auswähläen
       while (($data = fgetcsv($handle, 0, ";")) !== FALSE) { //csv auslesen mit ; trennung
           $num = count($data); //Datensätze zählen
+          //echo $data[1]."  ".$data[0]."</br>";
           for($c = 0; $c < $num - 1; $c++){
           if ($fieldnames !== 0) { //wird ausgeführt solange Fieldname nicht 0 ist
               $fieldnames = 0; //field name wird auf 0 gesetzt dass nur die Spaltennamen gezogen werden
@@ -77,6 +78,10 @@ function insertKaschusotoDB($Teilschule){
           }
           else { //Alle Datensätze ausser die Spalten namen werden nun in die Tabelle eingefügt
               $data[6] = sonderzeichen($data[6]);
+            //  $data[0] = sonderzeichen($data[0]);
+              //$data[1] = sonderzeichen($data[1]);
+              //$data[1] = strtok($data[1],' '); // Doppelnachnamen clearen
+              //echo $data[1]. "</br>";
               $sql = 'INSERT INTO Export2 VALUES (';
               for ($c = 0; $c < $num -1; $c++) { //für jeden Datensat
                   $sql .= '"' . $data[$c] . '"';

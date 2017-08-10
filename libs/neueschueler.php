@@ -4,7 +4,7 @@ function neueschuelerabfrage(){
   include_once("libs/csvspaltennamen.php");
   $link = dbconn();
   selectdb($link, 'Adexport');
-  $sql    = "SELECT DISTINCT `export2`.`name` , `export2`.`vorname` , `export2`.`verg_ID` as verg_ID, id, regelklasse, telefon, mobile,emailadresse, benutzername FROM `export2` LEFT JOIN `export1` ON export1.`name` = benutzername WHERE `benutzerstatus` = '1' AND `User Logon Name` IS NULL AND `regelklasse` LIKE '%17%'";
+  $sql    = "SELECT DISTINCT `export2`.`name` , `export2`.`vorname` , `export2`.`verg_ID` as verg_ID, id, regelklasse, telefon, mobile,emailadresse, benutzername FROM `export2` LEFT JOIN `export1` ON export1.`name` = benutzername WHERE `benutzerstatus` = 'JA' AND `User Logon Name` IS NULL AND `regelklasse` LIKE '%17%'";
   //
 //$sql    = "SELECT * FROM Export2 WHERE NOT EXISTS(SELECT NULL FROM Export1 WHERE Export1.verg_id = Export2.verg_id)"
     $resu = mysql_query($sql);
