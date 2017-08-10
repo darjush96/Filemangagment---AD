@@ -3,13 +3,13 @@
   include_once("libs/csvspaltennamen.php");
   $link = dbconn();
   selectdb($link, 'Adexport');
-  $sql    = "SELECT DISTINCT * FROM NeueMail WHERE EXISTS(SELECT NULL FROM AdMail WHERE AdMail.mail = NeueMail.mail)";
-  //
+  $sql    = "SELECT DISTINCT * FROM NeueMail WHERE NOT EXISTS(SELECT NULL FROM AdMail WHERE AdMail.mail = NeueMail.mail)";
+  //NOT Für die MAils wo nicht doppelt sind und Ohne Not für Mails die Doppelt vorhanden sind
 //$sql    = "SELECT * FROM Export2 WHERE NOT EXISTS(SELECT NULL FROM Export1 WHERE Export1.verg_id = Export2.verg_id)"
     $resu = mysql_query($sql);
     // output headers so that the file is downloaded rather than displayed
     header('Content-Type: text/csv; charset=utf-8');
-    header('Content-Disposition: attachment; filename=EmailAdresseInADvorhanden.csv');
+    header('Content-Disposition: attachment; filename=EmailAdresseInADnichtvorhanden.csv');
     // create a file pointer connected to the output stream
     $output = fopen('php://output', 'w');
 /*    $spaltnam = $spaltenname;
