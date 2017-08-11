@@ -20,8 +20,9 @@
 
     while ($row = mysql_fetch_array($resu))
     {
-      //$row["benutzerstatus"]
-      $line = array("","",$row["givenName"],$row["initials"],$row["sn"],$row["displayName"],$row["cn"],$row["sAMAccountName"],"2wsx","Schueler",$row["employeeID"],$row["department"],$row["company"],$row["streetAdress"],"",$row["postalCode"],$row["l"],"","Schweiz","CH",$row["telephoneNumber"],"","","",$row["mobile"],"","","","","","","","",$row['mail'],$row['userPrincipalName'],$row["info"],"www.bbzolten.so.ch",$row["description"],"","1","1","1","240","","","1","0","","","1","1","1",$row["Gruppe1"],$row["Gruppe2"],$row["Gruppe3"],$row["Gruppe4"],$row["Gruppe5"],$row["department"],"","","","","","","","","","","","","","","","","","","","","","","","");
+      $klassengruppe[0] = strtok($row[11],','); // Doppelnachnamen clearen
+      $klassengruppe[1] = strtok(','); // Doppelnachnamen clearen
+      $line = array("","",$row["givenName"],$row["initials"],$row["sn"],$row["displayName"],$row["cn"],$row["sAMAccountName"],"2wsx","Schueler",$row["employeeID"],$row["department"],$row["company"],$row["streetAdress"],"",$row["postalCode"],$row["l"],"","Schweiz","CH",$row["telephoneNumber"],"","","",$row["mobile"],"","","","","","","","",$row['mail'],$row['userPrincipalName'],$row["info"],"www.bbzolten.so.ch",$row["description"],"","1","1","1","240","","","1","0","","","1","1","1",$row["Gruppe1"],$row["Gruppe2"],$row["Gruppe3"],$row["Gruppe4"],$row["Gruppe5"],$klassengruppe[0],$klassengruppe[1],"","","","","","","","","","","","","","","","","","","","","","","");
       fputcsv($output, $line, ";");
       }
 
